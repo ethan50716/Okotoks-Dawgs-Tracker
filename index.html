@@ -34,7 +34,7 @@
     }
     input[type=number] {
       -moz-appearance: textfield;
-      appearance: textfield;
+      appearance: field;
     }
 
     /* ========================================================
@@ -166,7 +166,7 @@
       color: #b91c1c !important;
     }
 
-    /* Clean Header Pills (No Nested Boxes) */
+    /* Clean Header Pills */
     .header-mound-pill select,
     .header-plate-pill select,
     .header-pitcher-pill select {
@@ -272,7 +272,7 @@
     }
 
     /* ========================================================
-       LIGHT MODE STRIKE ZONE - SCALED DOWN TEXT SIZES
+       STRIKE ZONE - 5 DISCRETE CUT-OUT ZONES
        ======================================================== */
     body.light-mode #strike-zone-container {
       background: rgba(251, 248, 241, 0.88) !important;
@@ -328,7 +328,7 @@
     body.light-mode #zone-btn-5 {
       background: #ffffff !important;
       border: 2px solid #dc2626 !important;
-      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.22) !important;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2) !important;
     }
     body.light-mode #zone-btn-5 span:first-child {
       color: #991b1b !important;
@@ -344,14 +344,14 @@
     }
     body.light-mode #zone-btn-5.active-zone {
       background: #dc2626 !important;
-      border: 2.5px solid #7f1d1d !important;
+      border: 2px solid #7f1d1d !important;
     }
     body.light-mode #zone-btn-5.active-zone span {
       color: #ffffff !important;
     }
 
     /* ========================================================
-       MPH PILL & FORM CONTROLS (SEAMLESS MATCH IN LIGHT MODE)
+       MPH PILL & FORM CONTROLS
        ======================================================== */
     body.light-mode #pitch-velo-pill {
       background: linear-gradient(180deg, #ffffff 0%, #f6efe2 100%) !important;
@@ -385,9 +385,7 @@
       box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
     }
 
-    /* ========================================================
-       TEAMS & ROSTERS CONTRAST BOOST (LIGHT MODE)
-       ======================================================== */
+    /* TEAMS & ROSTERS */
     body.light-mode #view-roster .glass-panel {
       border: 1.5px solid #cfc1ab !important;
     }
@@ -440,15 +438,14 @@
 
   <!-- TOP APP BAR -->
   <header class="glass-panel sticky top-0 z-40 px-3 py-1.5 flex items-center justify-between gap-1.5 border-b border-white/10">
-    
-   <!-- LEFT: BRANDING -->
-<div class="flex items-center space-x-2 shrink-0">
-  <img 
-    src="dawgs_logo.png" 
-    alt="Okotoks Dawgs Academy Logo" 
-    class="w-8 h-8 rounded-full object-contain shadow-md border border-red-400/30 shrink-0" 
-  />
-  <div class="flex flex-col leading-none">
+    <!-- LEFT: BRANDING -->
+    <div class="flex items-center space-x-2 shrink-0">
+      <img 
+        src="dawgs_logo.png" 
+        alt="Okotoks Dawgs Academy Logo" 
+        class="w-8 h-8 rounded-full object-contain shadow-md border border-red-400/30 shrink-0" 
+      />
+      <div class="flex flex-col leading-none">
         <div class="flex items-center space-x-1.5">
           <span class="text-xs font-black tracking-wider uppercase text-white font-sans">
             DUGOUT<span class="text-red-500">DATA</span>
@@ -501,7 +498,7 @@
         <span>New Game</span>
       </button>
 
-      <!-- LIGHT MODE TOGGLE (CREAM/RED) -->
+      <!-- LIGHT MODE TOGGLE -->
       <button onclick="toggleLightModeTheme()" id="header-sun-btn" title="Toggle Dawgs Light Mode" class="p-1.5 glass-button text-slate-300 hover:text-red-400 rounded-xl transition active:scale-95">
         <i data-lucide="sun" id="header-sun-icon" class="w-3.5 h-3.5"></i>
       </button>
@@ -668,7 +665,7 @@
           </div>
         </div>
 
-        <!-- BULLPEN MODE CARD (RENAMED FROM SCOUTING MODE) -->
+        <!-- BULLPEN MODE CARD -->
         <div id="scouting-plate-panel" class="glass-panel rounded-2xl p-3.5 shadow-xl hidden space-y-3 border-red-500/30">
           <div class="flex items-center justify-between border-b border-white/10 pb-2">
             <div class="flex items-center space-x-1.5">
@@ -759,29 +756,36 @@
                 <span class="text-[8px] font-medium opacity-80">(Arm)</span>
               </button>
 
-              <!-- IN-ZONE 5-PANEL GRID -->
-              <div id="inner-5panel-grid" class="relative flex-1 h-48 bg-stone-950/90 border-2 border-red-600/80 rounded-2xl p-1 shadow-inner grid grid-cols-2 grid-rows-2 gap-1">
-                <button onclick="selectZone(1, 'In-Zone Up-In')" id="zone-btn-1" class="zone-grid-btn glass-card-interactive rounded-lg flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden">
+              <!-- IN-ZONE 5 INDIVIDUAL CUTOUT CELLS (CROSS GRID - NO OVERLAPPING) -->
+              <div id="inner-5panel-grid" class="relative flex-1 h-52 bg-stone-950/90 border-2 border-red-600/80 rounded-2xl p-1.5 shadow-inner grid grid-cols-3 grid-rows-3 gap-1">
+                <!-- Zone 1: Up-In Cutout -->
+                <button onclick="selectZone(1, 'In-Zone Up-In')" id="zone-btn-1" class="col-span-2 row-span-1 zone-grid-btn rounded-xl flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden glass-card-interactive border border-white/10">
                   <span id="zone-label-1" class="text-xs font-black tracking-tight text-red-400 leading-tight">Up-In</span>
                   <span id="zone-sub-1" class="text-[8px] font-mono text-slate-400">Z1</span>
                 </button>
-                <button onclick="selectZone(2, 'In-Zone Up-Away')" id="zone-btn-2" class="zone-grid-btn glass-card-interactive rounded-lg flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden">
+                
+                <!-- Zone 2: Up-Away Cutout -->
+                <button onclick="selectZone(2, 'In-Zone Up-Away')" id="zone-btn-2" class="col-span-1 row-span-2 zone-grid-btn rounded-xl flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden glass-card-interactive border border-white/10">
                   <span id="zone-label-2" class="text-xs font-black tracking-tight text-red-400 leading-tight">Up-Away</span>
                   <span id="zone-sub-2" class="text-[8px] font-mono text-slate-400">Z2</span>
                 </button>
-                <button onclick="selectZone(3, 'In-Zone Down-In')" id="zone-btn-3" class="zone-grid-btn glass-card-interactive rounded-lg flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden">
+                
+                <!-- Zone 3: Down-In Cutout -->
+                <button onclick="selectZone(3, 'In-Zone Down-In')" id="zone-btn-3" class="col-span-1 row-span-2 zone-grid-btn rounded-xl flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden glass-card-interactive border border-white/10">
                   <span id="zone-label-3" class="text-xs font-black tracking-tight text-red-400 leading-tight">Down-In</span>
                   <span id="zone-sub-3" class="text-[8px] font-mono text-slate-400">Z3</span>
                 </button>
-                <button onclick="selectZone(4, 'In-Zone Down-Away')" id="zone-btn-4" class="zone-grid-btn glass-card-interactive rounded-lg flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden">
-                  <span id="zone-label-4" class="text-xs font-black tracking-tight text-red-400 leading-tight">Down-Away</span>
-                  <span id="zone-sub-4" class="text-[8px] font-mono text-slate-400">Z4</span>
-                </button>
-
-                <!-- MIDDLE HEART -->
-                <button onclick="selectZone(5, 'In-Zone Middle (Heart)')" id="zone-btn-5" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-20 rounded-xl glass-card border-2 border-red-500/80 flex flex-col items-center justify-center shadow-lg active:scale-95 transition z-10 p-0.5">
+                
+                <!-- Zone 5: Middle Heart Cutout (Dedicated Cell) -->
+                <button onclick="selectZone(5, 'In-Zone Middle (Heart)')" id="zone-btn-5" class="col-span-1 row-span-1 rounded-xl glass-card border-2 border-red-500/80 flex flex-col items-center justify-center shadow-lg active:scale-95 transition p-0.5 overflow-hidden">
                   <span id="zone-label-5" class="text-xs font-black tracking-tight text-red-300 leading-tight">MIDDLE</span>
                   <span id="zone-sub-5" class="text-[8px] font-mono text-red-400/90 font-bold">Heart (Z5)</span>
+                </button>
+                
+                <!-- Zone 4: Down-Away Cutout -->
+                <button onclick="selectZone(4, 'In-Zone Down-Away')" id="zone-btn-4" class="col-span-2 row-span-1 zone-grid-btn rounded-xl flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden glass-card-interactive border border-white/10">
+                  <span id="zone-label-4" class="text-xs font-black tracking-tight text-red-400 leading-tight">Down-Away</span>
+                  <span id="zone-sub-4" class="text-[8px] font-mono text-slate-400">Z4</span>
                 </button>
               </div>
 
@@ -1418,7 +1422,7 @@
       },
       settings: {
         trackingMode: 'single',
-        lightMode: false // Dark mode is default
+        lightMode: false
       },
       scoutingModeState: {
         hitterSide: 'Right',
@@ -2137,6 +2141,14 @@
         5: ['MIDDLE', 'Heart (Z5)']
       };
 
+      const zoneGridClasses = {
+        1: 'col-span-2 row-span-1',
+        2: 'col-span-1 row-span-2',
+        3: 'col-span-1 row-span-2',
+        4: 'col-span-2 row-span-1',
+        5: 'col-span-1 row-span-1'
+      };
+
       for (let z = 1; z <= 9; z++) {
         const btn = document.getElementById(`zone-btn-${z}`);
         if (!btn) continue;
@@ -2149,9 +2161,11 @@
           btn.classList.toggle('active-zone', isSelected);
 
           if (!document.body.classList.contains('light-mode')) {
-            btn.className = isMiddle
-              ? `absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-20 rounded-xl flex flex-col items-center justify-center shadow-lg active:scale-95 transition z-10 p-0.5 ${isSelected ? 'bg-gradient-to-b from-red-600 to-red-800 border-2 border-red-300' : 'glass-card border-2 border-red-500/80'}`
-              : `zone-grid-btn rounded-lg flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden ${isSelected ? 'bg-gradient-to-b from-red-600 to-red-800 border-2 border-red-300 shadow-lg' : 'glass-card-interactive'}`;
+            const baseClass = isMiddle
+              ? `${zoneGridClasses[z]} rounded-xl flex flex-col items-center justify-center shadow-lg active:scale-95 transition p-0.5 overflow-hidden ${isSelected ? 'bg-gradient-to-b from-red-600 to-red-800 border-2 border-red-300' : 'glass-card border-2 border-red-500/80'}`
+              : `${zoneGridClasses[z]} zone-grid-btn rounded-xl flex flex-col items-center justify-center active:scale-95 transition p-1 overflow-hidden ${isSelected ? 'bg-gradient-to-b from-red-600 to-red-800 border-2 border-red-300 shadow-lg' : 'glass-card-interactive border border-white/10'}`;
+
+            btn.className = baseClass;
 
             const titleClass = isSelected 
               ? 'text-xs font-black tracking-tight text-white leading-tight'
